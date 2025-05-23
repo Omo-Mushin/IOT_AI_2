@@ -1,9 +1,10 @@
 streamlit==1.23.1
 pandas==2.0.3
 numpy==1.24.3
-plotly==5.17.0                # includes plotly.express
+plotly-express==0.4.1
 scikit-learn==1.2.2
 lifelines==0.27.4
 statsmodels==0.14.0
 prophet==1.1.2
-openpyxl==3.1.1               # Excel I/O support
+openpyxl==3.1.1        # Excel engine for pandas.read_excel
+xlrd==2.0.1            # Optional: legacy .xls support
