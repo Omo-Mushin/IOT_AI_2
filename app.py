@@ -78,18 +78,18 @@ st.markdown("""
 def load_production_data():
     # In a real app, you would load from your actual data source
     # This creates sample data if the file isn't found
-    
-    prod_data = pd.read_excel(r"Production_data.xlsx")
-    # except:
-    #     print('This production data was Simulated')
-    #     dates = pd.date_range(start='2023-01-01', end='2023-12-31')
-    #     prod_data = pd.DataFrame({
-    #         'Date': dates,
-    #         'Gross Act (BBL)': np.random.normal(500, 50, len(dates)).cumsum(),
-    #         'BSW': np.random.uniform(5, 15, len(dates)),
-    #         'Gas Produced (MMSCFD)': np.random.normal(2, 0.5, len(dates)),
-    #         'Hrs of Production': np.random.uniform(18, 24, len(dates))
-    #     })
+    try:
+        prod_data = pd.read_excel(r"Production_data.xlsx")
+    except:
+        print('This production data was Simulated')
+        dates = pd.date_range(start='2023-01-01', end='2023-12-31')
+        prod_data = pd.DataFrame({
+            'Date': dates,
+            'Gross Act (BBL)': np.random.normal(500, 50, len(dates)).cumsum(),
+            'BSW': np.random.uniform(5, 15, len(dates)),
+            'Gas Produced (MMSCFD)': np.random.normal(2, 0.5, len(dates)),
+            'Hrs of Production': np.random.uniform(18, 24, len(dates))
+        })
     
     prod_data['Date'] = pd.to_datetime(prod_data['Date'], format='%Y-%m-%d')
     return prod_data.sort_values('Date')
@@ -101,7 +101,7 @@ def load_production_data():
 def load_esp_data():
     # Replace with your actual loading logic
     # This creates sample data if the file isn't found
-    # try:
+    
     main_df3 = pd.read_excel(r"NEW_ESP_DATA.xlsx", sheet_name=None)
     monitor_dfs = list(main_df3.values())
     monitor_df = pd.concat(monitor_dfs, ignore_index=True)
